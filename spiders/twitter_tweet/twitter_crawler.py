@@ -100,7 +100,7 @@ def crawler_item(user_name: str, media_id: int, media_name: str, mt, begin_time:
 
 
 if __name__ == "__main__":
-    SETTING_PATH = "E:\\【微云工作台】\\数据\\华榜爬虫设置\\华榜爬虫数据\\media_list_setting.json"
+    SETTING_PATH = "E:\\【微云工作台】\\数据\\华榜爬虫数据\\media_list_setting.json"
     settings = tool.load_file_as_json(SETTING_PATH)
     mt = mysql.MysqlTable(settings["tweet_mysql_table_infor"])  # 获取数据表信息
 

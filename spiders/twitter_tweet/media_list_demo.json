@@ -1,5 +1,5 @@
 {
-  "mysql_infor": {
+  "tweet_mysql_table_infor": {
     "host": "**",
     "user": "**",
     "pswd": "**",
