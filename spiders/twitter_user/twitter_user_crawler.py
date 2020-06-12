@@ -68,6 +68,5 @@ if __name__ == "__main__":
         print("开始抓取媒体:", media_item[1], "(", media_item[0], ")", "-", media_item[3], "(", media_item[2], ")")
         crawler_item(browser, media_item[2], media_item[0], media_item[1], mt, settings["user_xpath"])
         time.sleep(tool.get_scope_random(1))
-        break
 
     browser.close()

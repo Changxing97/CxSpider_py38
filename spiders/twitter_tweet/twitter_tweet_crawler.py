@@ -1,6 +1,6 @@
 import time
 
-import twitter_scraper
+from spiders.twitter_tweet import twitter_scraper
 
 from utils import mysql
 from utils import tool
@@ -57,11 +57,12 @@ def crawler_item(user_name: str, media_id: int, media_name: str, mt, begin_time:
     end_time_stamp = int(time.mktime(time.strptime(end_time, "%Y-%m-%d %H:%M:%S")))  # 抓取结束时间范围
 
     # 抓取第1页(并判断是否包含所有要抓取的推文)
-    try:
-        tweet_list = translate_to_list(twitter_scraper.get_tweets(user_name, pages=1))  # 抓取推文数据
-    except:
-        print("抓取页数:", 1, "(账号不存在)")
-        return
+    # try:
+    tweet_list = translate_to_list(twitter_scraper.get_tweets(user_name, pages=1))  # 抓取推文数据
+    # except Exception as e:
+    #     print(e)
+    #     print("抓取页数:", 1, "(账号不存在)")
+    #     return
     first_page_time = get_earliest_tweet_stamp(tweet_list)  # 获取推文列表最早的推文的时间戳
 
     # 若第1页不包含所有要抓取的推算，则计算并抓取所需的页数
@@ -105,7 +106,10 @@ if __name__ == "__main__":
     mt = mysql.MysqlTable(settings["tweet_mysql_table_infor"])  # 获取数据表信息
 
     for media in settings["media_list"]:
+        # if int(media[0]) < 37:
+        #     continue
+
         print("开始抓取媒体:", media[1], "(", media[0], ")", "-", media[3], "(", media[2], ")")
         crawler_item(user_name=media[2], media_id=media[0], media_name=media[1], mt=mt,
-                     begin_time="2020-04-20 00:00:00", end_time="2020-04-21 23:59:59", )
+                     begin_time="2020-06-02 00:00:00", end_time="2020-06-02 23:59:59", )
         time.sleep(tool.get_scope_random(5))
